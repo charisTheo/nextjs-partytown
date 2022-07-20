@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useState } from 'react';
 import Script from 'next/script'
 
@@ -40,20 +39,6 @@ export default function Form() {
 
     return (
       <form onSubmit={handleSubmit} className='flex-column'>
-        <Head>
-            <script
-                data-partytown-config
-                dangerouslySetInnerHTML={{
-                    __html: `
-                    partytown = {
-                        debug: true
-                    };
-                    `,
-                }}
-            />
-            
-            {/* <script>{`window.recaptchaCallback=${recaptchaCallback.toString()}`}</script> */}
-        </Head>
         <Script src='https://www.google.com/recaptcha/api.js' strategy='worker' />
 
         <label>
@@ -69,7 +54,7 @@ export default function Form() {
         <button 
           type="submit"
           className="g-recaptcha" 
-          data-sitekey={process.env.NEXT_LOCAL_RECAPTCHA_SITE_KEY} 
+          data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} 
           data-callback='recaptchaCallback'
           data-action='submit'
         >Submit</button>
