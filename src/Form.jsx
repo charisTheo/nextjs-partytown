@@ -29,18 +29,32 @@ export default function Form() {
         alert('Form submitted!')
     };
 
+    function recaptchaCallback () {
+        console.log('recaptchaCallback')
+        const form = document.querySelector('form');
+        const event = new Event('submit', { 'bubbles': true, 'cancelable': true });
+        form.dispatchEvent(event);
+     }
+
+     globalThis.recaptchaCallback = recaptchaCallback
+
     return (
       <form onSubmit={handleSubmit} className='flex-column'>
         <Head>
-            <script>
-               {`function recaptchaCallback () {
-                   const form = document.querySelector('form');
-                   const event = new Event('submit', { 'bubbles': true, 'cancelable': true });
-                   form.dispatchEvent(event);
-                }`}
-            </script>
+            <script
+                data-partytown-config
+                dangerouslySetInnerHTML={{
+                    __html: `
+                    partytown = {
+                        debug: true
+                    };
+                    `,
+                }}
+            />
+            
+            {/* <script>{`window.recaptchaCallback=${recaptchaCallback.toString()}`}</script> */}
         </Head>
-        <Script src='https://www.google.com/recaptcha/api.js' />
+        <Script src='https://www.google.com/recaptcha/api.js' strategy='worker' />
 
         <label>
           Name

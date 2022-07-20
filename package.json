@@ -20,5 +20,8 @@
     "nextjs",
     "recaptcha",
     "partytown"
-  ]
+  ],
+  "devDependencies": {
+    "@builder.io/partytown": "^0.6.2"
+  }
 }
