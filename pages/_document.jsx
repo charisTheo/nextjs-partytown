@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <script>globalThis.mozRequestAnimationFrame = window.requestAnimationFrame</script>
         <script
           data-partytown-config
           dangerouslySetInnerHTML={{
@@ -11,6 +12,7 @@ export default function Document() {
             partytown = {
                 debug: true,
                 lib: "/_next/static/~partytown/",
+                forward: ["mozRequestAnimationFrame"],
                 resolveUrl: function (url, location, type) {
                     if (['www.google.com'].includes(url.hostname)) {
                         const proxyUrl = new URL("https://cdn.builder.io/api/v1/proxy-api");
