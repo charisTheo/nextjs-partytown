@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useState } from 'react';
 import Script from 'next/script'
 
@@ -29,18 +28,18 @@ export default function Form() {
         alert('Form submitted!')
     };
 
+    function recaptchaCallback () {
+        console.log('recaptchaCallback')
+        const form = document.querySelector('form');
+        const event = new Event('submit', { 'bubbles': true, 'cancelable': true });
+        form.dispatchEvent(event);
+     }
+
+     globalThis.recaptchaCallback = recaptchaCallback
+
     return (
       <form onSubmit={handleSubmit} className='flex-column'>
-        <Head>
-            <script>
-               {`function recaptchaCallback () {
-                   const form = document.querySelector('form');
-                   const event = new Event('submit', { 'bubbles': true, 'cancelable': true });
-                   form.dispatchEvent(event);
-                }`}
-            </script>
-        </Head>
-        <Script src='https://www.google.com/recaptcha/api.js' />
+        <Script src='https://www.google.com/recaptcha/api.js' strategy='worker' />
 
         <label>
           Name
