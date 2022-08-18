@@ -7,11 +7,14 @@ export default function Document() {
         <script>globalThis.mozRequestAnimationFrame = window.requestAnimationFrame</script>
         <script
           data-partytown-config
+          // Tested with local partytown lib folder with added missing window properties (i.e mozRequestAnimationFrame)
+          // lib: "../../partytown-source/lib",
+          // https://github.com/BuilderIO/partytown/issues/209
           dangerouslySetInnerHTML={{
             __html: `
             partytown = {
                 debug: true,
-                lib: "/_next/static/~partytown/",
+                lib: "../../partytown-source/lib",
                 forward: ["mozRequestAnimationFrame"],
                 resolveUrl: function (url, location, type) {
                     if (['www.google.com'].includes(url.hostname)) {
